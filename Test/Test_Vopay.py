@@ -222,46 +222,46 @@ def test_Validate_UserandPass_invalid(browser):
     assert launch1.loginFlinks()==True,"submit button disabled"
     assert launch1.Clickretrybutton()==True
 
-#
-# @allure.title('Validate username and password with more comination')
-# def test_Validate_UserandPass(browser):
-#     launch1.verifyvalidusername(validuser)
-#     launch1.verifyinvalidPass(invalidPass)
-#     assert launch1.loginFlinks()==True,"submit button disabled"
-#     assert launch1.Clickretrybutton()==True, "invalid login"
-#     time.sleep(3)
-#
-# @allure.title('Validate invalidusername and valid password ')
-# def test_Validate_invalidUser_validPass(browser):
-#     launch1.verifyinvalidusername(invalidUser)
-#     launch1.verifyvalidpass(validpass)
-#     assert launch1.loginFlinks()==True,"submit button disabled"
-#     assert launch1.Clickretrybutton()==True, "invalid login"
-#
-#
-# @allure.title('Click on resetpass and get url to redirected page')
-# def test_ClickresetPass(browser):
-#     launch1.verifyvalidusername(validuser)
-#     launch1.verifyvalidpass(validpass)
-#     assert launch1.Clickresetpassword_button()=='https://flinks.io/',"navigate wrong url"
-#
-#
-# @allure.title('login with valid credentail and login succesfully')
-# def test_Afterlogin_verify(browser):
-#     launch1.switchtab()
-#     launch1.switchtoiframe()
-#     launch1.switchtoiframe2()
-#     launch1.search_flinknamedBank(flinkName)
-#     # launch1.selectTan_flink()
-#     assert launch1.Click_agreeButton()==True,"Tangerine Logo not displayed on Agreecontinue page "
-#     launch1.verifyvalidusername(validuser)
-#     launch1.verifyvalidpass(validpass)
-#     assert launch1.loginFlinks()==True,"submit button disabled"
-#
-# @allure.title('User provide invalid security question')
-# def test_Verify_invalidsecurity(browser):
-#     assert launch1.verify_invalidsecurityans()=='Invalid answer',"answer correct"
-#     assert launch1.verify_security()==True,"invalid security"
+
+@allure.title('Validate username and password with more comination')
+def test_Validate_UserandPass(browser):
+    launch1.verifyvalidusername(validuser)
+    launch1.verifyinvalidPass(invalidPass)
+    assert launch1.loginFlinks()==True,"submit button disabled"
+    assert launch1.Clickretrybutton()==True, "invalid login"
+    time.sleep(3)
+
+@allure.title('Validate invalidusername and valid password ')
+def test_Validate_invalidUser_validPass(browser):
+    launch1.verifyinvalidusername(invalidUser)
+    launch1.verifyvalidpass(validpass)
+    assert launch1.loginFlinks()==True,"submit button disabled"
+    assert launch1.Clickretrybutton()==True, "invalid login"
+
+
+@allure.title('Click on resetpass and get url to redirected page')
+def test_ClickresetPass(browser):
+    launch1.verifyvalidusername(validuser)
+    launch1.verifyvalidpass(validpass)
+    assert launch1.Clickresetpassword_button()=='https://flinks.io/',"navigate wrong url"
+
+
+@allure.title('login with valid credentail and login succesfully')
+def test_Afterlogin_verify(browser):
+    launch1.switchtab()
+    launch1.switchtoiframe()
+    launch1.switchtoiframe2()
+    launch1.search_flinknamedBank(flinkName)
+    # launch1.selectTan_flink()
+    assert launch1.Click_agreeButton()==True,"Flinks Logo not displayed on Agreecontinue page "
+    launch1.verifyvalidusername(validuser)
+    launch1.verifyvalidpass(validpass)
+    assert launch1.loginFlinks()==True,"submit button disabled"
+
+@allure.title('User provide invalid security question')
+def test_Verify_invalidsecurity(browser):
+    assert launch1.verify_invalidsecurityans()=='Invalid answer',"answer correct"
+    assert launch1.verify_security()==True,"invalid security"
 
 #
 # @allure.title('Cliick on simulate login and verify the token ')
