@@ -1,0 +1,87 @@
+{
+  "uid" : "4c203a42959e9090",
+  "name" : "User is able to search and select bank",
+  "fullName" : "Test.Test_Vopay#test_selectbank",
+  "historyId" : "a20afbea479990c0bf760ef1bf257f31",
+  "time" : {
+    "start" : 1603111994778,
+    "stop" : 1603112008372,
+    "duration" : 13594
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Search Tanger Bank",
+      "time" : {
+        "start" : 1603111994778,
+        "stop" : 1603112002775,
+        "duration" : 7997
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "bankName",
+        "value" : "'Tanger'"
+      } ],
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0,
+      "stepsCount" : 0,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "2993d84969e56ee7",
+      "name" : "screenshot",
+      "source" : "2993d84969e56ee7.png",
+      "type" : "image/png",
+      "size" : 32903
+    } ],
+    "parameters" : [ ],
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 1,
+    "stepsCount" : 1,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "Test"
+  }, {
+    "name" : "suite",
+    "value" : "Test_Vopay"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-5B2R9UF"
+  }, {
+    "name" : "thread",
+    "value" : "15280-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "Test.Test_Vopay"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "4c203a42959e9090.json",
+  "parameterValues" : [ ]
+}
