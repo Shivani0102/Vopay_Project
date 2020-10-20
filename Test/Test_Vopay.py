@@ -204,14 +204,15 @@ def test_verifyText_AgreeContinuePage(browser):
     assert launch1.verifyTextAgree()=='Access your account transaction history',"text not matched"
     assert launch1.verifyTextAgree2()=='Access your name, email, address and phone number',"text not matched"
     assert launch1.ClickCancelbutton()=='Connect with your bank',"page not redirected to homepage"
+#
+#
+# @allure.title('Click AgreeContinue button navigate to login page and click on back arrow on loginpage back to homepage')
+# def test_RedirectLoginPage(browser):
+#     launch1.selectTan_flink()
+#     assert launch1.Click_agreeButton()==True,"Tangerine Logo not displayed on Agreecontinue page "
+#     assert launch1.clickonBackarrow()=='Connect with your bank',"page not redirected to homepage"
+#     assert launch1.search_flinknamedBank(flinkName)==True,"Flink bank not display"
 
-
-@allure.title('Click AgreeContinue button navigate to login page and click on back arrow on loginpage back to homepage')
-def test_RedirectLoginPage(browser):
-    launch1.selectTan_flink()
-    assert launch1.Click_agreeButton()==True,"Tangerine Logo not displayed on Agreecontinue page "
-    assert launch1.clickonBackarrow()=='Connect with your bank',"page not redirected to homepage"
-    assert launch1.search_flinknamedBank(flinkName)==True,"Flink bank not display"
 #
 # @allure.title('Validate username and password with invalid credentails')
 # def test_Validate_UserandPass_invalid(browser):
@@ -286,13 +287,13 @@ def test_Flinkinnerurl_newbrowser(browser):
     launch1.switchtoiframe()
     assert launch1.VerifyonHide()==False,"Hide button not working"
 
-
-@allure.title('switch to iframe again and search tan Bank(Inner url)')
-def test_searchbankFlinkURL_inner(browser):
-    launch1.refreshpage()
-    launch1.switchtoiframe()
-    assert launch1.switchtoiframe2()==True,"Hidebutton not display"
-    assert launch1.searchBank1(TanName)==True,"Tan Bank not display"
+#
+# @allure.title('switch to iframe again and search tan Bank(Inner url)')
+# def test_searchbankFlinkURL_inner(browser):
+#     launch1.refreshpage()
+#     launch1.switchtoiframe()
+#     assert launch1.switchtoiframe2()==True,"Hidebutton not display"
+#     assert launch1.searchBank1(TanName)==True,"Tan Bank not display"
 #
 #
 # @allure.title('select bank and naviagate agree and continue(Inner url)')
