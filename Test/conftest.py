@@ -13,8 +13,8 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.chrome import options
 from selenium.webdriver.chrome.options import Options
 
-CONFIG_PATH = 'resources\config.json'
-Browser_path = 'resources/chromedriver.exe'
+CONFIG_PATH = os.getcwd() + 'resources\config.json'
+Browser_path = os.getcwd() + 'resources/chromedriver.exe'
 DEFAULT_WAIT_TIME = 10
 SUPPORTED_BROWSERS = ['chrome']
 
@@ -76,7 +76,7 @@ def browser(config_browser, config_wait_time, request):
         options.add_argument("--proxy-server='direct://'")
         options.add_argument("--proxy-bypass-list=*")
         options.add_argument("--start-maximized")
-        options.add_argument('--headless')
+        # options.add_argument('--headless')
         options.add_argument('--disable-gpu')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--no-sandbox')

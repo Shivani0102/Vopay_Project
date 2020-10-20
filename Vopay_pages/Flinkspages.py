@@ -256,7 +256,8 @@ class Flinkspages:
         self.driver.execute_script("window.open('https://dev2.vopay.com/iframe/old/inner.html','new window3')")
         time.sleep(3)
         print("open in new tab2")
-        self.driver.switch_to.window(self.driver.window_handles[5])
+        # """5"""
+        self.driver.switch_to.window(self.driver.window_handles[2])
         time.sleep(3)
 
     def switchwindow_oldjs(self):
@@ -290,10 +291,6 @@ class Flinkspages:
         time.sleep(10)
         self.driver.implicitly_wait(300)
         wait = WebDriverWait(self.driver, 10)
-        # wait.until(EC.url_matches())
-        # wait.until(
-            # lambda driver: driver.current_url == desired_url)
-        # wait.until(EC.visibility_of_element_located(By.XPATH,"https://www.tangerine.ca/app/#/"))
         time.sleep(20)
         get= self.driver.current_url
         print(get)
@@ -304,6 +301,10 @@ class Flinkspages:
         # """1"""
         self.driver.switch_to.window(self.driver.window_handles[1])
 
+    def switchtabinner(self):
+        time.sleep(3)
+        # """1"""
+        self.driver.switch_to.window(self.driver.window_handles[2])
 
     def loginFlinks(self):
         try:
@@ -334,9 +335,9 @@ class Flinkspages:
         return retry
 
     def Clicksimulatebutton(self):
-        time.sleep(4)
+        time.sleep(5)
         self.driver.refresh()
-        self.driver.implicitly_wait(60)
+        self.driver.implicitly_wait(100)
         frame= self.driver.find_element(*self.iframelink)
         self.driver.switch_to.frame(frame)
         self.driver.find_element(*self.SimulateLoginbutton).click()
@@ -344,21 +345,45 @@ class Flinkspages:
         thank= self.driver.find_element(*self.thanktoken).text
         return thank
 
-    def verify_token(self):
+    def verify_outertoken(self):
+        time.sleep(10)
         self.driver.switch_to.window(self.driver.window_handles[1])
         time.sleep(2)
         get= self.driver.current_url
         print(get)
-        getcountOR = "og88s44wgswc4gwc4oc00s08kskgw0www440ok8ko44c40c480kcsk8okk480css"
+        getcountOR =str("og88s44wgswc4gwc4oc00s08kskgw0www440ok8ko44c40c480kcsk8okk480css")
+        print(getcountOR)
         string = str(get)
-        getount = string.split("=")
-        print(getount[1])
+        token= string.split("&")
+        print(token[0])
+        string1 = str(token[0])
+        getount = string1.split("=")
+        get1= str(getount[1])
+        print(get1)
         try:
-            if str(getcountOR) == str(getount[1]):
+            if str(getcountOR) == str(get1):
                 return True
-            else:
-                return False
+        except:
+            return False
 
+    def verify_token(self):
+        time.sleep(10)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        time.sleep(2)
+        get= self.driver.current_url
+        print(get)
+        getcountOR =str("og88s44wgswc4gwc4oc00s08kskgw0www440ok8ko44c40c480kcsk8okk480css")
+        print(getcountOR)
+        string = str(get)
+        # token= string.split("&")
+        # print(token[0])
+        # string1 = str(token[0])
+        getount = string.split("=")
+        get1= str(getount[1])
+        print(get1)
+        try:
+            if str(getcountOR) == str(get1):
+                return True
         except:
             return False
 
@@ -404,7 +429,8 @@ class Flinkspages:
             select.click()
         time.sleep(2)
         self.driver.find_element(*self.continuebtn).click()
-        self.driver.implicitly_wait(60)
+        self.driver.implicitly_wait(100)
+        time.sleep(3)
         return text
 
 

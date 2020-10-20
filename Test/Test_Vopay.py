@@ -212,14 +212,14 @@ def test_RedirectLoginPage(browser):
     assert launch1.Click_agreeButton()==True,"Tangerine Logo not displayed on Agreecontinue page "
     assert launch1.clickonBackarrow()=='Connect with your bank',"page not redirected to homepage"
     assert launch1.search_flinknamedBank(flinkName)==True,"Flink bank not display"
-
-@allure.title('Validate username and password with invalid credentails')
-def test_Validate_UserandPass_invalid(browser):
-    launch1.Click_agreeButton()
-    launch1.verifyinvalidusername(invalidUser)
-    launch1.verifyinvalidPass(invalidPass)
-    assert launch1.loginFlinks()==True,"submit button disabled"
-    assert launch1.Clickretrybutton()==True,"button not displayed"
+#
+# @allure.title('Validate username and password with invalid credentails')
+# def test_Validate_UserandPass_invalid(browser):
+#     launch1.Click_agreeButton()
+#     launch1.verifyinvalidusername(invalidUser)
+#     launch1.verifyinvalidPass(invalidPass)
+#     assert launch1.loginFlinks()==True,"submit button disabled"
+#     assert launch1.Clickretrybutton()==True,"button not displayed"
 #
 #
 # @allure.title('Validate username and password with more comination')
@@ -245,59 +245,60 @@ def test_Validate_UserandPass_invalid(browser):
 #     assert launch1.Clickresetpassword_button()=='https://flinks.io/',"navigate wrong url"
 #
 #
-@allure.title('login with valid credentail and login succesfully')
-def test_Afterlogin_verify(browser):
+# @allure.title('login with valid credentail and login succesfully')
+# def test_Afterlogin_verify(browser):
 #     launch1.switchtab()
 #     launch1.switchtoiframe()
 #     launch1.switchtoiframe2()
 #     launch1.search_flinknamedBank(flinkName)
 #     launch1.Click_agreeButton()
-    launch1.verifyvalidusername(validuser)
-    launch1.verifyvalidpass(validpass)
-    assert launch1.loginFlinks()==True,"submit button disabled"
+#     launch1.verifyvalidusername(validuser)
+#     launch1.verifyvalidpass(validpass)
+#     assert launch1.loginFlinks()==True,"submit button disabled"
+#
+# @allure.title('User provide invalid security question')
+# def test_Verify_invalidsecurity(browser):
+#     launch1.verify_invalidsecurityans()
+#     time.sleep(2)
+#     assert launch1.verify_invalidsecurityans()=='Invalid answer',"answer correct"
+#
+# @allure.title('User provide valid security question and click continue to account select')
+# def test_validsecurity(browser):
+#     launch1.verify_security()
+#     assert launch1.selectAccount()=='Please select an account',"invalid security"
+#
+# @allure.title('To verify the outer redirect')
+# def test_verifyouterredirect(browser):
+#     assert launch1.verify_outertoken() == True, "token not display"
 
-@allure.title('User provide invalid security question')
-def test_Verify_invalidsecurity(browser):
-    launch1.verify_invalidsecurityans()
-    time.sleep(2)
-    # assert launch1.verify_invalidsecurityans()=='Invalid answer',"answer correct"
 
-@allure.title('User provide valid security question and click continue to account select')
-def test_validsecurity(browser):
-    launch1.verify_security()
-    # assert launch1.verify_security()==True,"invalid security"
-    assert launch1.selectAccount()=='Please select an account',"invalid security"
-    assert launch1.verify_token() == True, "token not display"
+    # @allure.title('Cliick on simulate login and verify the token ')
+    # def test_verifyToken_Onsimulateclick(browser):
+    #     assert launch1.Clicksimulatebutton()=='Thank You!',"Token page not reached"
+    #     assert launch1.verify_token()==True,"token not display"
 
-#
-# @allure.title('Cliick on simulate login and verify the token ')
-# def test_verifyToken_Onsimulateclick(browser):
-#     assert launch1.Clicksimulatebutton()=='Thank You!',"Token page not reached"
-#     assert launch1.verify_token()==True,"token not display"
-#
 
-#
-# """Inner url (Flinks)"""
-#
-# @allure.title('To open newtab3 and Hide redLine in flinks url(Inner url)')
-# def test_Flinkinnerurl_newbrowser(browser):
-#     assert launch1.switchwindow_oldinner()=='https://dev2.vopay.com/iframe/old/inner.html', "URL not matched"
-#     launch1.switchtoiframe()
-#     assert launch1.VerifyonHide()==False,"Hide button not working"
-#
-#
-# @allure.title('switch to iframe again and search tan Bank(Inner url)')
-# def test_searchbankFlinkURL_inner(browser):
-#     launch1.refreshpage()
-#     launch1.switchtoiframe()
-#     assert launch1.switchtoiframe2()==True,"Hidebutton not display"
-#     assert launch1.searchBank1(TanName)==True,"Tan Bank not display"
+"""Inner url (Flinks)"""
+
+@allure.title('To open newtab3 and Hide redLine in flinks url(Inner url)')
+def test_Flinkinnerurl_newbrowser(browser):
+    assert launch1.switchwindow_oldinner()=='https://dev2.vopay.com/iframe/old/inner.html', "URL not matched"
+    launch1.switchtoiframe()
+    assert launch1.VerifyonHide()==False,"Hide button not working"
+
+
+@allure.title('switch to iframe again and search tan Bank(Inner url)')
+def test_searchbankFlinkURL_inner(browser):
+    launch1.refreshpage()
+    launch1.switchtoiframe()
+    assert launch1.switchtoiframe2()==True,"Hidebutton not display"
+    assert launch1.searchBank1(TanName)==True,"Tan Bank not display"
 #
 #
 # @allure.title('select bank and naviagate agree and continue(Inner url)')
 # def test_selectbankFlinkURL_inner(browser):
-#     assert launch1.selectTan_flink()=="Click 'AGREE and CONTINUE' to allow username test to proceed.","Agree and continue page not displayed"
-#     assert launch1.verifyAgreepage()=='Access your account number', "text not matched"
+#     assert launch1.selectTan_flink() == "Click 'AGREE and CONTINUE' to allow username test to proceed.", "Agree and continue page not displayed"
+#     assert launch1.verifyAgreepage() == 'Access your account number', "text not matched"
 #
 #
 # @allure.title('verify text on agree page and click on cancel button page redirected to HomePage(Inner url) ')
@@ -308,57 +309,80 @@ def test_validsecurity(browser):
 #     assert launch1.ClickCancelbutton()=='Connect with your bank',"page not redirected to homepage"
 #
 #
+#
 # @allure.title('Click AgreeContinue button navigate to login page and click on back arrow on loginpage back to homepage(Inner url)')
 # def test_RedirectLoginPage_inner(browser):
 #     launch1.selectTan_flink()
 #     assert launch1.Click_agreeButton()==True,"Tangerine Logo not displayed on Agreecontinue page "
-#     launch1.clickonBackarrow()
-#     launch1.selectTan_flink()
+#     assert launch1.clickonBackarrow()=='Connect with your bank',"page not redirected to homepage"
+#     assert launch1.search_flinknamedBank(flinkName)==True,"Flink bank not display"
+#
 #
 # @allure.title('Validate username and password with invalid credentails(Inner url)')
 # def test_Validate_UserandPass_invalid_inner(browser):
 #     launch1.Click_agreeButton()
 #     launch1.verifyinvalidusername(invalidUser)
 #     launch1.verifyinvalidPass(invalidPass)
-#     assert launch1.loginFlinks()==True,"submit button disabled"
-#     assert launch1.Clickretrybutton()=='Invalid password', "invalid login"
+#     assert launch1.loginFlinks() == True, "submit button disabled"
+#     assert launch1.Clickretrybutton() == True, "button not displayed"
 #
 #
-# @allure.title('Validate username and password with more comination(Inner url)')
+# @allure.title('Validate username and password with more comination(Inner URl)')
 # def test_Validate_UserandPass_inner(browser):
 #     launch1.verifyvalidusername(validuser)
 #     launch1.verifyinvalidPass(invalidPass)
 #     assert launch1.loginFlinks()==True,"submit button disabled"
-#     assert launch1.Clickretrybutton()=='Invalid password', "invalid login"
+#     assert launch1.Clickretrybutton()==True, "invalid login"
 #     time.sleep(3)
+#
+# @allure.title('Validate invalidusername and valid password (Inner URl)')
+# def test_Validate_invalidUser_validPass_inner(browser):
 #     launch1.verifyinvalidusername(invalidUser)
 #     launch1.verifyvalidpass(validpass)
 #     assert launch1.loginFlinks()==True,"submit button disabled"
-#     assert launch1.Clickretrybutton()=='Invalid password', "invalid login"
+#     assert launch1.Clickretrybutton()==True, "invalid login"
 #
 #
-# @allure.title('Click on resetpass and get url to redirected page(Inner url)')
+# @allure.title('Click on resetpass and get url to redirected page(Inner Url)')
 # def test_ClickresetPass_inner(browser):
 #     launch1.verifyvalidusername(validuser)
 #     launch1.verifyvalidpass(validpass)
-#     assert launch1.Clickresetpassword_button()=='https://www.tangerine.ca/app/#/',"navigate wrong url"
+#     assert launch1.Clickresetpassword_button()=='https://flinks.io/',"navigate wrong url"
 #
 #
-# @allure.title('login with valid credentail and login succesfully(Inner url)')
+#
+# @allure.title('login with valid credentail and login succesfully(Inner URl)')
 # def test_Afterlogin_verify_inner(browser):
-#     launch1.switchtab()
+#     launch1.switchtabinner()
 #     launch1.switchtoiframe()
 #     launch1.switchtoiframe2()
-#     launch1.searchBank1(TanName)
-#     launch1.selectTan_flink()
-#     assert launch1.Click_agreeButton()==True,"Tangerine Logo not displayed on Agreecontinue page "
+#     launch1.search_flinknamedBank(flinkName)
+#     launch1.Click_agreeButton()
 #     launch1.verifyvalidusername(validuser)
 #     launch1.verifyvalidpass(validpass)
-#     assert launch1.loginFlinks()==True,"submit button disabled"
+#     assert launch1.loginFlinks() == True, "submit button disabled"
 #
 #
-# @allure.title('Cliick on simulate login and verify the token(Inner url) ')
+# @allure.title('User provide invalid security question(Inner URl)')
+# def test_Verify_invalidsecurity_inner(browser):
+#     launch1.verify_invalidsecurityans()
+#     time.sleep(2)
+#     # assert launch1.verify_invalidsecurityans()=='Invalid answer',"answer correct"
+#
+#
+# @allure.title('User provide valid security question and click continue to account select(Inner URl)')
+# def test_validsecurity_inner(browser):
+#     launch1.verify_security()
+#     assert launch1.selectAccount() == 'Please select an account', "invalid security"
+#
+#
+# @allure.title('To verify the outer redirect(Inner URl)')
+# def test_verifyouterredirect_inner(browser):
+#     assert launch1.verify_outertoken() == True, "token not display"
+#
+#
+# @allure.title('Cliick on simulate login and verify the token(Inner URl) ')
 # def test_verifyToken_Onsimulateclick_inner(browser):
-#     assert launch1.Clicksimulatebutton()=='Thank You!',"Token page not reached"
-#     assert launch1.verify_token()==True,"token not display"
+#     assert launch1.Clicksimulatebutton() == 'Thank You!', "Token page not reached"
+#     assert launch1.verify_token() == True, "token not display"
 #
