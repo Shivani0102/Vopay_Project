@@ -269,12 +269,12 @@ def test_validsecurity(browser):
     assert launch1.selectAccount()=='Please select an account',"invalid security"
     assert launch1.verify_token() == True, "token not display"
 
-
-@allure.title('Cliick on simulate login and verify the token ')
-def test_verifyToken_Onsimulateclick(browser):
-    assert launch1.Clicksimulatebutton()=='Thank You!',"Token page not reached"
-    assert launch1.verify_token()==True,"token not display"
-
+#
+# @allure.title('Cliick on simulate login and verify the token ')
+# def test_verifyToken_Onsimulateclick(browser):
+#     assert launch1.Clicksimulatebutton()=='Thank You!',"Token page not reached"
+#     assert launch1.verify_token()==True,"token not display"
+#
 
 #
 # """Inner url (Flinks)"""
