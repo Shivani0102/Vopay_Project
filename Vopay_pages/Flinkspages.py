@@ -54,10 +54,14 @@ class Flinkspages:
     # ques1city=(By.XPATH,"//label[contains(text(),'What city were you born in?')]")
     ques1city=(By.XPATH,"//label[contains(text(),'What is the best country on earth?')]")
     answer = (By.XPATH,"//input[@id='mfa-QuestionAndAnswer-0']")
+    answertitle =(By.XPATH,"//label[@class='label-small']")
     continuebtn = (By.XPATH,"//input[@value='Continue']")
     connection =(By.XPATH,"//h1[@class='title___2dOQ9 my-3x']")
     securityans = (By.XPATH,"//text[contains(text(),'Answer to security question:')]")
     securityanstext =(By.XPATH,"//ul[@class='list-unstyled']/li[1]")
+    selectaccount =(By.XPATH,"//h1[@class='h4']/span[1]/div[1]")
+    cheque1=(By.XPATH,"//a[@tabindex='2']")
+    cheque2 = (By.XPATH,"//a[@tabindex='1']")
 
 
     def __init__(self, driver):
@@ -283,7 +287,7 @@ class Flinkspages:
         self.driver.refresh()
         # """6"""
         self.driver.switch_to.window(self.driver.window_handles[2])
-        time.sleep(20)
+        time.sleep(10)
         self.driver.implicitly_wait(300)
         wait = WebDriverWait(self.driver, 10)
         # wait.until(EC.url_matches())
@@ -363,7 +367,8 @@ class Flinkspages:
         self.driver.find_element(*self.answer).send_keys("answer")
         self.driver.find_element(*self.continuebtn).click()
         time.sleep(3)
-        text= self.driver.find_element(*self.invalidsecuritytext).text
+        text= self.driver.find_element(*self.retrybutton).is_displayed()
+        # print(text)
         self.driver.find_element(*self.retrybutton).click()
         return text
 
@@ -373,15 +378,32 @@ class Flinkspages:
         print(text)
         print(get)
         string = str(get)
-        getount = string.split(":")
-        print(getount[1])
+        getount = string.split(": ")
+        get1= str(getount[1])
+        print(get1)
         entervalue= self.driver.find_element(*self.answer)
+        entervalue.send_keys(Keys.CONTROL + "a")
+        entervalue.send_keys(Keys.DELETE)
+        time.sleep(2)
+        entervalue.send_keys(get1)
+        time.sleep(2)
+        self.driver.find_element(*self.continuebtn).click()
+
+
+
+    def selectAccount(self):
+        text = self.driver.find_element(*self.selectaccount).text
+        print(text)
         try:
-            ans= entervalue.is_displayed()
-            if ans==True:
-                entervalue.send_keys(getount)
-                return True
-            else:
-                return False
+            self.driver.find_element(*self.cheque1).is_displayed()
+            self.driver.find_element(*self.cheque1).click()
         except:
-            return False
+            select= self.driver.find_element(*self.cheque1)
+            select.is_displayed()
+            select.click()
+        time.sleep(2)
+        self.driver.find_element(*self.continuebtn).click()
+        self.driver.implicitly_wait(60)
+        return text
+
+
