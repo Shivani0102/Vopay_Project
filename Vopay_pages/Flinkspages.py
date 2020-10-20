@@ -256,6 +256,7 @@ class Flinkspages:
         self.driver.execute_script("window.open('https://dev2.vopay.com/iframe/old/inner.html','new window2')")
         time.sleep(5)
         print("open in new tab2")
+        time.sleep(3)
         self.driver.switch_to.window(self.driver.window_handles[2])
         time.sleep(3)
 
