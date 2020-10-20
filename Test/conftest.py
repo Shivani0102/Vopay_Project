@@ -84,16 +84,16 @@ def browser(config_browser, config_wait_time, request):
         options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"')
         # chrome_options.add_argument("--window-size=1920x1080")  # options=options
         driver = Chrome(Browser_path, options=options)
-    else:
-        raise Exception(f'"{config_browser}" is not a supported browser')
+        # else:
+        #     raise Exception(f'"{config_browser}" is not a supported browser')
 
-    # Wait implicitly for elements to be ready before attempting interactions
-    driver.implicitly_wait(config_wait_time)
-    driver.maximize_window()
+        # Wait implicitly for elements to be ready before attempting interactions
+        driver.implicitly_wait(config_wait_time)
+        driver.maximize_window()
 
-    # Return the driver object at the end of setup
-    yield driver
+        # Return the driver object at the end of setup
+        yield driver
 
-    # For cleanup, quit the driver
-    driver.quit()
+        # For cleanup, quit the driver
+        driver.quit()
 
