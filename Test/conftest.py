@@ -16,7 +16,7 @@ from selenium.webdriver.chrome.options import Options
 # CONFIG_PATH = 'resources\config.json'
 # CONFIG_PATH = os.getcwd() + r'\\resources\\config.json'
 CONFIG_PATH = os.getcwd() + "/resources/config.json"
-Browser_path = "/resources/chromedriver"
+Browser_path = os.getcwd() + "/resources/chromedriver"
 DEFAULT_WAIT_TIME = 10
 SUPPORTED_BROWSERS = ['chrome']
 
