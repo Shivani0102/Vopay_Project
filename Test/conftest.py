@@ -16,7 +16,7 @@ from selenium.webdriver.chrome.options import Options
 # CONFIG_PATH = 'resources\config.json'
 # CONFIG_PATH = os.getcwd() + r'\\resources\\config.json'
 CONFIG_PATH = r'//var//lib//jenkins//workspace//Vopay_Test//resources//config.json'
-Browser_path =r'tmp//chromedriver'
+Browser_path =r'//var//lib//jenkins//workspace//Vopay_Test//resources//chromedriver'
 DEFAULT_WAIT_TIME = 10
 SUPPORTED_BROWSERS = ['chrome']
 
