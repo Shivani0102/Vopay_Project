@@ -197,13 +197,13 @@ def test_selectbankFlinkURLr(browser):
     assert launch1.selectTan_flink()=="Click 'AGREE and CONTINUE' to allow username test to proceed.","Agree and continue page not displayed"
     assert launch1.verifyAgreepage()=='Access your account number', "text not matched"
 
-
-@allure.title('verify text on agree page and click on cancel button page redirected to HomePage ')
-def test_verifyText_AgreeContinuePage(browser):
-    time.sleep(2)
-    assert launch1.verifyTextAgree()=='Access your account transaction history',"text not matched"
-    assert launch1.verifyTextAgree2()=='Access your name, email, address and phone number',"text not matched"
-    assert launch1.ClickCancelbutton()=='Connect with your bank',"page not redirected to homepage"
+#
+# @allure.title('verify text on agree page and click on cancel button page redirected to HomePage ')
+# def test_verifyText_AgreeContinuePage(browser):
+#     time.sleep(2)
+#     assert launch1.verifyTextAgree()=='Access your account transaction history',"text not matched"
+#     assert launch1.verifyTextAgree2()=='Access your name, email, address and phone number',"text not matched"
+#     assert launch1.ClickCancelbutton()=='Connect with your bank',"page not redirected to homepage"
 #
 #
 # @allure.title('Click AgreeContinue button navigate to login page and click on back arrow on loginpage back to homepage')
