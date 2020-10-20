@@ -256,7 +256,6 @@ class Flinkspages:
         self.driver.execute_script("window.open('https://dev2.vopay.com/iframe/old/inner.html','new window3')")
         time.sleep(5)
         print("open in new tab2")
-        # """5"""
         self.driver.switch_to.window(self.driver.window_handles[2])
         time.sleep(3)
 
@@ -265,7 +264,7 @@ class Flinkspages:
         self.driver.execute_script("window.open('https://dev2.vopay.com/iframe/old/js.html','new window4')")
         time.sleep(3)
         print("open in new tab2")
-        self.driver.switch_to.window(self.driver.window_handles[5])
+        self.driver.switch_to.window(self.driver.window_handles[3])
         time.sleep(3)
 
     def VerifyonHide(self):
