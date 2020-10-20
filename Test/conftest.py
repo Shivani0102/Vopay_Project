@@ -34,7 +34,7 @@ def config_browser(config):
     if 'browser' not in config:
         raise Exception('The config file does not contain "browser"')
     elif config['browser'] not in SUPPORTED_BROWSERS:
-        raise Exception(f'"{config["browser"]}" is not a supported browser')
+        raise Exception(f'"{config_browser}" is not a supported browser')
     return config['browser']
 
 @allure.step('Configuring the wait time for browser')

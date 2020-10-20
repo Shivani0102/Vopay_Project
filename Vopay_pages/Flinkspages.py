@@ -345,6 +345,7 @@ class Flinkspages:
         return thank
 
     def verify_token(self):
+        self.driver.switch_to.window(self.driver.window_handles[2])
         time.sleep(2)
         get= self.driver.current_url
         print(get)
