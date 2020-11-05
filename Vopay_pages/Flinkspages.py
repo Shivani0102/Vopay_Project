@@ -3,10 +3,11 @@ import time
 from telnetlib import EC
 
 import allure
+import keyboard
 
 from selenium import webdriver
 import pytest
-from selenium.webdriver import ActionChains
+from selenium.webdriver import ActionChains, DesiredCapabilities
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
@@ -16,8 +17,9 @@ from resources.variables import bankName
 
 
 class Flinkspages:
-    URL= "https://dev2.vopay.com/iframe/new/outer.html"
-    desired_url = "https://www.tangerine.ca/app/#/"
+
+    URL= "https://vopay-testing.com/iframe/new/outer.html"
+    desired_url = "https://vopay-testing.com/iframe/old/inner.html"
     iframelink= (By.XPATH,"//body/center[1]/iframe[1]")
     iframelink1 = (By.XPATH,"//iframe[@src='https://earthnode-dev.vopay.com/iq11/embed/3498f75d7511a31e3f381e6944a081843ed742f3/true']")
     iframelink2 = (By.XPATH,"//iframe[@sandbox='allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation']")
@@ -49,7 +51,7 @@ class Flinkspages:
     invalidusertext = (By.XPATH, "//p[contains(text(),'Invalid username')]")
     invalidsecuritytext = (By.XPATH, "//p[contains(text(),'Invalid answer')]")
     retrybutton=(By.XPATH,"//input[@value='Retry']")
-    thanktoken=(By.XPATH,"//h2[contains(text(),'Thank You!')]")
+    thanktoken=(By.XPATH,"//div[@class='token-container']/div[1]/div[1]")
     flinkbank= (By.XPATH,"//img[@alt='Flinks Capital International']")
     # ques1city=(By.XPATH,"//label[contains(text(),'What city were you born in?')]")
     ques1city=(By.XPATH,"//label[contains(text(),'What is the best country on earth?')]")
@@ -62,6 +64,9 @@ class Flinkspages:
     selectaccount =(By.XPATH,"//h1[@class='h4']/span[1]/div[1]")
     cheque1=(By.XPATH,"//a[@tabindex='2']")
     cheque2 = (By.XPATH,"//a[@tabindex='1']")
+    innertoken = (By.XPATH, "//div[@class='well']/text()")
+    tokensimulatejs=(By.XPATH,"//input[@value='og88s44wgswc4gwc4oc00s08kskgw0www440ok8ko44c40c480kcsk8okk480css']")
+
 
 
     def __init__(self, driver):
@@ -75,6 +80,29 @@ class Flinkspages:
         time.sleep(6)
         frame= self.driver.find_element(*self.iframelink)
         self.driver.switch_to.frame(frame)
+
+
+    def switchtoiframesimulate(self):
+        time.sleep(5)
+        self.driver.switch_to.window(self.driver.window_handles[5])
+        frame= self.driver.find_element(*self.iframelink)
+        self.driver.switch_to.frame(frame)
+        time.sleep(2)
+        frame= self.driver.find_element(*self.iframelink2)
+        self.driver.switch_to.frame(frame)
+        time.sleep(2)
+        frame= self.driver.find_element(*self.iframelink2)
+        self.driver.switch_to.frame(frame)
+
+    def switchtoiframesimulate_JS(self):
+        time.sleep(6)
+        self.driver.switch_to.window(self.driver.window_handles[7])
+        frame= self.driver.find_element(*self.iframelink)
+        self.driver.switch_to.frame(frame)
+        time.sleep(2)
+        element=print (self.driver.page_source)
+        string = str(element)
+
 
     def refreshpage(self):
         self.driver.refresh()
@@ -242,10 +270,10 @@ class Flinkspages:
 
     def switchagain_oldouter(self):
         time.sleep(4)
-        self.driver.execute_script("window.open('https://dev2.vopay.com/iframe/old/outer.html','new window2')")
+        self.driver.execute_script("window.open('https://vopay-testing.com/iframe/old/outer.html','new window2')")
         time.sleep(3)
         print("open Flinks url in new tab2")
-        self.driver.switch_to.window(self.driver.window_handles[1])
+        self.driver.switch_to.window(self.driver.window_handles[3])
         time.sleep(3)
         get= self.driver.current_url
         print(get)
@@ -253,20 +281,26 @@ class Flinkspages:
 
     def switchwindow_oldinner(self):
         time.sleep(3)
-        self.driver.execute_script("window.open('https://dev2.vopay.com/iframe/old/inner.html','new window2')")
+        self.driver.execute_script("window.open('https://vopay-testing.com/iframe/old/inner.html','new window3')")
         time.sleep(5)
         print("open in new tab2")
+        time.sleep(5)
+        self.driver.switch_to.window(self.driver.window_handles[5])
         time.sleep(3)
-        self.driver.switch_to.window(self.driver.window_handles[2])
-        time.sleep(3)
+        get= self.driver.current_url
+        print(get)
+        return get
 
     def switchwindow_oldjs(self):
         time.sleep(2)
-        self.driver.execute_script("window.open('https://dev2.vopay.com/iframe/old/js.html','new window4')")
+        self.driver.execute_script("window.open('https://vopay-testing.com/iframe/old/js.html','new window5')")
         time.sleep(3)
-        print("open in new tab2")
-        self.driver.switch_to.window(self.driver.window_handles[3])
+        print("open in new tab6")
+        self.driver.switch_to.window(self.driver.window_handles[7])
         time.sleep(3)
+        get= self.driver.current_url
+        print(get)
+        return get
 
     def VerifyonHide(self):
         time.sleep(2)
@@ -287,7 +321,7 @@ class Flinkspages:
         time.sleep(6)
         self.driver.refresh()
         # """6"""
-        self.driver.switch_to.window(self.driver.window_handles[2])
+        self.driver.switch_to.window(self.driver.window_handles[4])
         time.sleep(10)
         self.driver.implicitly_wait(300)
         wait = WebDriverWait(self.driver, 10)
@@ -298,13 +332,48 @@ class Flinkspages:
 
     def switchtab(self):
         time.sleep(3)
+        # """1/3"""
+        self.driver.switch_to.window(self.driver.window_handles[3])
+
+    def Clickresetpassword_button_inner(self):
+        self.driver.find_element(*self.resetpass).click()
+        self.driver.implicitly_wait(200)
+        time.sleep(6)
+        self.driver.refresh()
+        # """6"""
+        self.driver.switch_to.window(self.driver.window_handles[6])
+        time.sleep(10)
+        self.driver.implicitly_wait(300)
+        wait = WebDriverWait(self.driver, 10)
+        time.sleep(20)
+        get= self.driver.current_url
+        print(get)
+        return get
+
+    def Clickresetpassword_button_js(self):
+        self.driver.find_element(*self.resetpass).click()
+        self.driver.implicitly_wait(200)
+        time.sleep(6)
+        self.driver.refresh()
+        # """6"""
+        self.driver.switch_to.window(self.driver.window_handles[8])
+        time.sleep(10)
+        self.driver.implicitly_wait(300)
+        wait = WebDriverWait(self.driver, 10)
+        time.sleep(20)
+        get= self.driver.current_url
+        print(get)
+        return get
+
+    def switchtabJS(self):
+        time.sleep(3)
         # """1"""
-        self.driver.switch_to.window(self.driver.window_handles[1])
+        self.driver.switch_to.window(self.driver.window_handles[7])
 
     def switchtabinner(self):
         time.sleep(3)
         # """1"""
-        self.driver.switch_to.window(self.driver.window_handles[2])
+        self.driver.switch_to.window(self.driver.window_handles[5])
 
     def loginFlinks(self):
         try:
@@ -334,24 +403,47 @@ class Flinkspages:
             print(text)
         return retry
 
-    def Clicksimulatebutton(self):
+
+    def Clicksimulatebutton_inner(self):
         time.sleep(5)
         self.driver.refresh()
-        self.driver.implicitly_wait(100)
+        self.driver.implicitly_wait(150)
+        self.driver.switch_to.window(self.driver.window_handles[5])
+        time.sleep(3)
         frame= self.driver.find_element(*self.iframelink)
         self.driver.switch_to.frame(frame)
         self.driver.find_element(*self.SimulateLoginbutton).click()
+        time.sleep(8)
+        html = self.driver.find_element_by_tag_name('html')
+        html.send_keys(Keys.END)
+        value= self.driver.find_element(*self.thanktoken).text
+        token =str(print(value))
+        if token !="":
+            return True
+        else:
+            return False
+
+
+    def Clicksimulatebutton(self):
+        time.sleep(5)
+        self.driver.refresh()
+        self.driver.implicitly_wait(150)
+        self.driver.switch_to.window(self.driver.window_handles[7])
+        frame = self.driver.find_element(*self.iframelink)
+        self.driver.switch_to.frame(frame)
         time.sleep(3)
-        thank= self.driver.find_element(*self.thanktoken).text
-        return thank
+        self.driver.find_element(*self.SimulateLoginbutton).click()
+        time.sleep(5)
+
 
     def verify_outertoken(self):
         time.sleep(10)
-        self.driver.switch_to.window(self.driver.window_handles[1])
+        self.driver.switch_to.window(self.driver.window_handles[3])
         time.sleep(2)
         get= self.driver.current_url
         print(get)
-        getcountOR =str("og88s44wgswc4gwc4oc00s08kskgw0www440ok8ko44c40c480kcsk8okk480css")
+        global getcountOR
+        getcountOR =self.driver.find_element(*self.thanktoken).text
         print(getcountOR)
         string = str(get)
         token= string.split("&")
@@ -366,27 +458,60 @@ class Flinkspages:
         except:
             return False
 
-    def verify_token(self):
+
+    def verify_innertoken(self):
         time.sleep(10)
-        self.driver.switch_to.window(self.driver.window_handles[1])
+        # self.driver.switch_to.window(self.driver.window_handles[1])
         time.sleep(2)
         get= self.driver.current_url
         print(get)
-        getcountOR =str("og88s44wgswc4gwc4oc00s08kskgw0www440ok8ko44c40c480kcsk8okk480css")
-        print(getcountOR)
-        string = str(get)
-        # token= string.split("&")
-        # print(token[0])
-        # string1 = str(token[0])
-        getount = string.split("=")
-        get1= str(getount[1])
-        print(get1)
-        try:
-            if str(getcountOR) == str(get1):
-                return True
-        except:
+        html = self.driver.find_element_by_tag_name('html')
+        html.send_keys(Keys.END)
+        time.sleep(4)
+        value = self.driver.find_element(*self.thanktoken).text
+        token =str(print(value))
+        if token !="":
+            return True
+        else:
             return False
 
+
+
+    def verify_token(self):
+        time.sleep(10)
+        self.driver.switch_to.window(self.driver.window_handles[5])
+        time.sleep(2)
+        get= self.driver.current_url
+        print(get)
+        frame= self.driver.find_element(*self.iframelink2)
+        self.driver.switch_to.frame(frame)
+        html = self.driver.find_element_by_tag_name('html')
+        html.send_keys(Keys.END)
+        value = str("https://vopay-testing.com/iframe/old/inner.html")
+        if str(value) == str(get):
+            return True
+        else:
+            return False
+
+
+    def verify_tokenJS(self):
+        time.sleep(10)
+        get= self.driver.current_url
+        print(get)
+        frame= self.driver.find_element(*self.iframelink2)
+        self.driver.switch_to.frame(frame)
+        time.sleep(2)
+        getcountOR =str("og88s44wgswc4gwc4oc00s08kskgw0www440ok8ko44c40c480kcsk8okk480css")
+        print(getcountOR)
+        time.sleep(2)
+        html = self.driver.find_element_by_tag_name('html')
+        html.send_keys(Keys.END)
+        value = self.driver.find_element(*self.thanktoken).text
+        print(value)
+        if str(getcountOR) == str(value):
+            return True
+        else:
+            return False
 
     def verify_invalidsecurityans(self):
         time.sleep(2)
@@ -416,7 +541,6 @@ class Flinkspages:
         self.driver.find_element(*self.continuebtn).click()
 
 
-
     def selectAccount(self):
         text = self.driver.find_element(*self.selectaccount).text
         print(text)
@@ -433,4 +557,120 @@ class Flinkspages:
         time.sleep(3)
         return text
 
+    def JS_token(self):
+        time.sleep(10)
+        self.driver.switch_to.window(self.driver.window_handles[7])
 
+        new_caps = {}
+        new_caps["browserName"] = 'chrome',
+        new_caps["javascriptEnabled"] = True,
+        new_caps["acceptSslCerts"] = True
+
+        d = DesiredCapabilities.CHROME
+        d['goog:loggingPrefs'] = {'browser': 'ALL'}
+        # d['loggingPrefs'] = {'browser': 'ALL'}
+        # driver = webdriver.Chrome(desired_capabilities=d)
+        time.sleep(3)
+        logs_1 = self.driver.get_log('browser')
+        print("A::", logs_1)
+        # logs_2 = self.driver.get_log('browser')
+        # print("B::", logs_2)
+        # time.sleep(4)
+        #
+        # for entry in self.driver.get_log('browser'):
+        #     print(entry)
+        time.sleep(2)
+        get = self.driver.current_url
+        print(get)
+        url=str("https://vopay-testing.com/iframe/old/js.html")
+        if str(url)==str(get):
+            return True
+        else:
+            return False
+
+    def check_errors_console_log(self):
+        time.sleep(10)
+
+        # log = self.driver.read_browser_console_log()
+        # log_errors = []
+        # for entry in log:
+        #     if entry['level'] == 'SEVERE':
+        #         log_errors.append(entry['message'])
+        # "Function to get the browser's console log errors"
+
+        current_console_log_errors = []
+        # As IE driver does not support retrieval of any logs,
+        # we are bypassing the get_browser_console_log() method
+        if "ie" not in str(self.driver):
+            log_errors = []
+            new_errors = []
+            log = self.get_browser_console_log()
+            print("Console Log: ", log)
+            for entry in log:
+                if entry['level'] == 'SEVERE':
+                    log_errors.append(entry['message'])
+
+            if current_console_log_errors != log_errors:
+                # Find the difference
+                new_errors = list(set(log_errors) - set(current_console_log_errors))
+                # Set current_console_log_errors = log_errors
+                current_console_log_errors = log_errors
+                print(current_console_log_errors)
+
+            if len(new_errors) > 0:
+                print("\nBrowser console error on url: %s\nConsole error(s):%s" % (self.driver.current_url, '\n----'.join(new_errors)))
+
+    def get_browser_console_log(self):
+        "Get the browser console log"
+        try:
+            log = self.driver.get_log('browser')
+            return log
+        except Exception as e:
+            print("Exception when reading Browser Console log")
+            print(str(e))
+
+        driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
+        # driver.get("https://infoheap.com/demo/page_having_js_member_errors.html")
+        print (self.driver.get_log('browser'))
+
+
+    def JS_tokenvalue(self):
+        time.sleep(8)
+        self.driver.switch_to.window(self.driver.window_handles[7])
+        elem = self.driver.find_element_by_xpath('//input[@id="Token"]')
+        value = self.driver.execute_script('return arguments[0].value;', elem)
+        token= str(print("{}".format(value)))
+        if token!="" and token != None:
+            return True
+        else:
+            return False
+
+    def JS_Bankvalue(self):
+        time.sleep(2)
+        elem = self.driver.find_element_by_xpath('//input[@id="Bank"]')
+        value = self.driver.execute_script('return arguments[0].value;', elem)
+        bank= str(print("{}".format(value)))
+        if bank !="" and bank != None:
+            return True
+        else:
+            return False
+
+    def JS_FullName(self):
+        time.sleep(2)
+        elem = self.driver.find_element_by_xpath('//input[@id="FullName"]')
+        value = self.driver.execute_script('return arguments[0].value;', elem)
+        Name= str(print("{}".format(value)))
+        if Name !="" and Name != None:
+            return True
+        else:
+            return False
+
+    def JS_MaskedAccount(self):
+        time.sleep(2)
+        elem = self.driver.find_element_by_xpath('//input[@id="MaskedAccount"]')
+        value = self.driver.execute_script('return arguments[0].value;', elem)
+        Name= str(print("{}".format(value)))
+        if Name !="" and Name != None:
+            return True
+        else:
+            return False

@@ -1,4 +1,5 @@
 {
   "browser": "chrome",
-  "wait_time": 15
+  "wait_time": 15,
+  "browser1": "firefox"
 }
