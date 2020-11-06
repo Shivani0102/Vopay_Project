@@ -104,6 +104,7 @@ class Iframe:
 
     @allure.description('Launch outer url')
     def browser_load(self):
+        self.driver.maximize_window()
         self.driver.get(self.URL)
         self.driver.implicitly_wait(150)
 
@@ -666,15 +667,13 @@ class Iframe:
 
 
 
+
     def verify_outertoken_vopay(self):
-        time.sleep(15)
+        time.sleep(10)
         # self.driver.switch_to.window(self.driver.window_handles[1])
         time.sleep(2)
         get= self.driver.current_url
         print(get)
-        time.sleep(3)
-        self.driver.switch_to.default_content()
-        time.sleep(2)
         getcountOR =self.driver.find_element(*self.tokenprint).text
         print(getcountOR)
         string = str(get)
@@ -824,7 +823,6 @@ class Iframe:
         else:
             return False
 
-
     def verify_JStoken_vopayurl(self):
         time.sleep(10)
         self.driver.switch_to.window(self.driver.window_handles[2])
@@ -861,6 +859,7 @@ class Iframe:
         #     print(entry)
         # time.sleep(2)
 
+
     def JS_Bankvopayurl(self):
         time.sleep(2)
         elem = self.driver.find_element_by_xpath('//input[@id="BankId"]')
@@ -887,10 +886,6 @@ class Iframe:
         value = self.driver.execute_script('return arguments[0].value;', elem)
         Name= str(print("{}".format(value)))
         if Name !="" and Name != None:
-            if len(Name) != 0:
-                print(Name)
-                print(len(Name))
-                print('Not empty String')
             return True
         else:
             return False

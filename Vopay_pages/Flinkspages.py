@@ -211,7 +211,7 @@ class Flinkspages:
 
     @allure.description('Enter Invalid username in FlinkURL')
     def verifyinvalidusername(self, invalidUser):
-        self.driver.implicitly_wait(50)
+        self.driver.implicitly_wait(60)
         user =self.driver.find_element(*self.flinkusername)
         user.send_keys(Keys.CONTROL + "a")
         user.send_keys(Keys.DELETE)
@@ -233,7 +233,7 @@ class Flinkspages:
 
     @allure.description('Enter Invalid password in FlinkURL')
     def verifyinvalidPass(self, invalidPass):
-        self.driver.implicitly_wait(50)
+        self.driver.implicitly_wait(60)
         pwd= self.driver.find_element(*self.flinkpass)
         pwd.send_keys(Keys.CONTROL + "a")
         pwd.send_keys(Keys.DELETE)
@@ -243,13 +243,14 @@ class Flinkspages:
 
     @allure.description('Enter Valid username in FlinkURL')
     def verifyvalidpass(self,validpass):
-        self.driver.implicitly_wait(50)
+        self.driver.implicitly_wait(60)
         pwd = self.driver.find_element(*self.flinkpass)
         pwd.send_keys(Keys.CONTROL + "a")
         pwd.send_keys(Keys.DELETE)
         time.sleep(2)
         pwd.send_keys(validpass)
         time.sleep(3)
+
 
     @allure.description('Accept Vopay Terms and policy')
     def AcceptVopayTerms(self):
@@ -272,7 +273,7 @@ class Flinkspages:
         time.sleep(4)
         self.driver.execute_script("window.open('https://vopay-testing.com/iframe/old/outer.html','new window2')")
         time.sleep(3)
-        print("open Flinks url in new tab2")
+        print("open flinks url in new tab3")
         self.driver.switch_to.window(self.driver.window_handles[3])
         time.sleep(3)
         get= self.driver.current_url
@@ -283,7 +284,7 @@ class Flinkspages:
         time.sleep(3)
         self.driver.execute_script("window.open('https://vopay-testing.com/iframe/old/inner.html','new window3')")
         time.sleep(5)
-        print("open in new tab2")
+        print("open flinks in new tab4")
         time.sleep(5)
         self.driver.switch_to.window(self.driver.window_handles[5])
         time.sleep(3)
@@ -295,7 +296,7 @@ class Flinkspages:
         time.sleep(2)
         self.driver.execute_script("window.open('https://vopay-testing.com/iframe/old/js.html','new window5')")
         time.sleep(3)
-        print("open in new tab6")
+        print("open flinks in new tab6")
         self.driver.switch_to.window(self.driver.window_handles[7])
         time.sleep(3)
         get= self.driver.current_url

@@ -15,25 +15,11 @@ from selenium.webdriver import Firefox
 from selenium.webdriver.chrome import options, webdriver
 from selenium.webdriver.chrome.options import Options
 
-ch_capabilities = {"build": "Porting test to LambdaTest Selenium Grid",
-                "name": "Porting test to LambdaTest Selenium Grid",
-                "platform": "macOS Mojave",
-                "browserName": "chrome",
-                "version": "12.0"}
 
-
-f_capabilities = {"build": "Porting test to LambdaTest Selenium Grid",
-                "name": "Porting test to LambdaTest Selenium Grid",
-                "platform": "macOS Mojave",
-                "browserName": "firefox",
-                "version": "12.0"}
-
-
-user_name = "user-name"
-app_key = "app_key"
 CONFIG_PATH = 'resources\config.json'
 Browser_path = 'resources\chromedriver.exe'
-Browser_path1 = 'resources\geckodriver.exe'
+# CONFIG_PATH = 'resources\config.json'
+# CONFIG_PATH = os.getcwd() + r'\\resources\\config.json'
 # CONFIG_PATH = os.getcwd() + "/resources/config.json"
 # Browser_path = "/usr/local/bin/chromedriver"
 DEFAULT_WAIT_TIME = 10
@@ -58,17 +44,6 @@ def config_browser(config):
     #     raise Exception(f'"{config["browser"]}" is not a supported browser')
     return config['browser']
 
-
-@pytest.fixture(scope='session')
-def config_browser1(config):
-    # Validate and return the browser choice from the config data
-    # To extend the browser support in future
-    if 'browser1' not in config:
-        raise Exception('The config file does not contain "browser"')
-    # elif config['browser'] not in SUPPORTED_BROWSERS:
-    #     raise Exception(f'"{config["browser"]}" is not a supported browser')
-    return config['browser1']
-
 @allure.step('Configuring the wait time for browser')
 @pytest.fixture(scope='session')
 def config_wait_time(config):
@@ -83,9 +58,8 @@ def pytest_runtest_makereport(item, call):
         mode = 'a' if os.path.exists('failures') else 'w'
         try:
             with open('failures', mode) as f:
-                if 'browser' and 'browser1' in item.fixturenames:  # assume this is fixture with webdriver
-                    web_driver = item.funcargs['browser'] and item.funcargs['browser1']
-
+                if 'browser' in item.fixturenames:  # assume this is fixture with webdriver
+                    web_driver = item.funcargs['browser']
                 # else :
                 #     print('Fail to take screen-shot')
                 #     return
@@ -96,75 +70,37 @@ def pytest_runtest_makereport(item, call):
             )
         except Exception as e:
             print('Fail to take screen-shot: {}'.format(e))
-#
-# @allure.step('Initializing the configured browser')
-# @pytest.fixture(scope='session')
-# def browser(config_browser, config_wait_time, request):
-#     # Initialize WebDriver
-#     if config_browser == 'chrome':
-#         options = Options()
-#         options.add_argument('log-level=3')
-#         options.add_argument("--window-size=1920,1080")
-#         options.add_argument("--disable-extensions")
-#         options.add_argument("--proxy-server='direct://'")
-#         options.add_argument("--proxy-bypass-list=*")
-#         options.add_argument("--start-maximized")
-#         options.add_experimental_option('excludeSwitches', ['enable-logging'])
-#         # options.add_argument('--headless')
-#         options.add_argument('--disable-gpu')
-#         options.add_argument('--disable-dev-shm-usage')
-#         options.add_argument('--no-sandbox')
-#         options.add_argument('--ignore-certificate-errors')
-#         options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"')
-#         # chrome_options.add_argument("--window-size=1920x1080")  # options=options
-#         driver = Chrome(Browser_path, options=options)
-#         # else:
-#         #     raise Exception(f'"{config_browser}" is not a supported browser')
-#
-#         # Wait implicitly for elements to be ready before attempting interactions
-#         driver.implicitly_wait(config_wait_time)
-#         driver.maximize_window()
-#
-#         # Return the driver object at the end of setup
-#         yield driver
-#
-#         # For cleanup, quit the driver
-#         driver.quit()
-
 
 @allure.step('Initializing the configured browser')
 @pytest.fixture(scope='session')
-def browser1(config_browser1, config_wait_time, request):
+def browser(config_browser, config_wait_time, request):
     # Initialize WebDriver
-    if config_browser1 == 'firefox':
+    if config_browser == 'chrome':
         options = Options()
-        # options.add_argument('log-level=3')
-        # options.add_argument("--window-size=1920,1080")
-        # options.add_argument("--disable-extensions")
-        # options.add_argument("--proxy-server='direct://'")
-        # options.add_argument("--proxy-bypass-list=*")
-        # options.add_argument("--start-maximized")
-        # options.add_experimental_option('excludeSwitches', ['enable-logging'])
-        # options.add_argument('--headless')
-        # options.add_argument('--disable-gpu')
-        # options.add_argument('--disable-dev-shm-usage')
-        # options.add_argument('--no-sandbox')
-        # options.add_argument('--ignore-certificate-errors')
+        options.add_argument('log-level=3')
+        options.add_argument("--window-size=1920,1080")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--proxy-server='direct://'")
+        options.add_argument("--proxy-bypass-list=*")
+        options.add_argument("--start-maximized")
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--ignore-certificate-errors')
         options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"')
         # chrome_options.add_argument("--window-size=1920x1080")  # options=options
-        driver1 = Firefox(Browser_path1, options=options)
-        # driver1 = webdriver.Firefox(executable_path='C:\Python\geckodriver.exe')
+        driver = Chrome(Browser_path, options=options)
         # else:
         #     raise Exception(f'"{config_browser}" is not a supported browser')
 
         # Wait implicitly for elements to be ready before attempting interactions
-        driver1.implicitly_wait(config_wait_time)
-        driver1.maximize_window()
+        driver.implicitly_wait(config_wait_time)
+        driver.maximize_window()
 
         # Return the driver object at the end of setup
-        yield driver1
+        yield driver
 
         # For cleanup, quit the driver
-        driver1.quit()
-
-
+        driver.quit()

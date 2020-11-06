@@ -120,6 +120,7 @@ class VisaPage:
         return get
 
 
+
     def verify_VisaJStoken(self):
         time.sleep(8)
         self.driver.switch_to.window(self.driver.window_handles[10])
@@ -128,14 +129,14 @@ class VisaPage:
         time.sleep(2)
         html = self.driver.find_element_by_tag_name('html')
         html.send_keys(Keys.END)
-        text1 = self.driver.find_element(*self.thanktoken).text
-        print(text1)
+        # text1 = self.driver.find_element(*self.thanktoken).text
+        # print(text1)
         self.driver.switch_to.window(self.driver.window_handles[10])
         time.sleep(2)
         elem = self.driver.find_element_by_xpath('//input[@id="Token"]')
         value = self.driver.execute_script('return arguments[0].value;', elem)
         token = str(print("{}".format(value)))
-        if token != "":
+        if token != "" and token!=None:
             return True
         else:
             return False
